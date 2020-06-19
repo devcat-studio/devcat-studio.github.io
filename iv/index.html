@@ -36,17 +36,24 @@
             top: 5px;
             background: white;
             color: #444;
-            text-align: center;
             padding-bottom: 3px;
-            font-size: 16px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            font-size: 14px;
+            padding-top: 5px;
+            padding-bottom: 5px;
             padding-left: 20px;
             padding-right: 20px;
             border-radius: 13px;
             cursor: pointer;
             z-index: 101;
             visibility: hidden;
+        }
+        .HelpWhat {
+            font-weight: bold;
+            color: #666;
+        }
+        .HelpHow {
+            margin-left: 10px;
+            color: #666;
         }
     </style>
 </head>
@@ -55,11 +62,22 @@
         ?
     </div>
     <div id='HelpContent'>
-        Space + 드래그 = 스크롤<br>
-        마우스 휠 = 확대/축소<br>
-        Ctrl + Space + 좌우 드래그 = 확대/축소<br>
-        F = 전체화면 토글<br>
-        Ctrl + 0 = 화면 크기에 맞추기
+        <p>
+            <div class='HelpWhat'>스크롤</div>
+            <div class='HelpHow'>드래그 <span style='font-size:11px; color:#aaa;'>또는</span><br>Space + 드래그</div>
+        </p>
+        <p>
+            <div class='HelpWhat'>확대/축소</div>
+            <div class='HelpHow'>마우스 휠 <span style='font-size:11px; color:#aaa;'>또는</span><br>Ctrl + Space + 좌우 드래그</div>            
+        </p>
+        <p>
+            <div class='HelpWhat'>전체화면 토글</div>
+            <div class='HelpHow'>F</div>
+        </p>
+        <p>
+            <div class='HelpWhat'>화면 크기에 맞추기</div>
+            <div class='HelpHow'>Ctrl + 0</div>
+        </p>
     </div>
 
     <div style='width:100%; height:100%;'></div>

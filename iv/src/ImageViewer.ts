@@ -45,6 +45,11 @@ function getModeAndSetCursor(): Mode {
         }
     }
 
+    if (mouseButtonIsPressed) {
+        document.documentElement.style.cursor = 'grab';
+        return Mode.Pan;
+    }
+
     document.documentElement.style.cursor = '';
     return Mode.None;
 }
