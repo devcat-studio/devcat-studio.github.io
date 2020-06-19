@@ -1,0 +1,25 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "declaration": false,
+    "inlineSources": true,
+    "lib": [ "dom", "es5", "es2015" ],
+    "module": "none",
+    "noEmitOnError": true,
+    "outFile": "../imageviewer.js",
+    "removeComments": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "include": [
+    "./**/*.ts",
+  ],
+    "exclude": [
+      "node_modules",
+    ]
+  }
+
