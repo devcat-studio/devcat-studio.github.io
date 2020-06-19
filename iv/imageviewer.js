@@ -6,6 +6,13 @@ var imageHeight = 1;
 var zoom = 1.0;
 var panX = 0;
 var panY = 0;
+var zoomPivotOnImageX = 0;
+var zoomPivotOnImageY = 0;
+var zoomPivotOnPageX = 0;
+var zoomPivotOnPageY = 0;
+var lastMouseX = 0;
+var lastMouseY = 0;
+var MIN_ZOOM = 0.2;
 var Mode;
 (function (Mode) {
     Mode[Mode["None"] = 0] = "None";
@@ -65,6 +72,15 @@ function fitToScreen() {
     panY = 0;
     updateImagePlacement();
 }
+function adjustZoom(delta) {
+    zoom += delta;
+    if (zoom < MIN_ZOOM) {
+        zoom = MIN_ZOOM;
+    }
+    panX = zoomPivotOnPageX - getBasicLeft() - zoomPivotOnImageX * (zoom * getBasicZoom());
+    panY = zoomPivotOnPageY - getBasicTop() - zoomPivotOnImageY * (zoom * getBasicZoom());
+    updateImagePlacement();
+}
 img.setAttribute('src', document.location.search.substring(1));
 img.onload = function () {
     imageWidth = img.clientWidth;
@@ -97,12 +113,6 @@ img.onload = function () {
         delete pressedKeys[ev.key];
         getModeAndSetCursor();
     };
-    var zoomPivotOnImageX = 0;
-    var zoomPivotOnImageY = 0;
-    var zoomPivotOnPageX = 0;
-    var zoomPivotOnPageY = 0;
-    var lastMouseX = 0;
-    var lastMouseY = 0;
     document.onmousedown = function (ev) {
         ev.preventDefault();
         zoomPivotOnPageX = lastMouseX = ev.pageX;
@@ -130,14 +140,16 @@ img.onload = function () {
             updateImagePlacement();
         }
         else if (mode == Mode.Zoom) {
-            zoom += ev.movementX * 0.005;
-            if (zoom < 0.2) {
-                zoom = 0.2;
-            }
-            panX = zoomPivotOnPageX - getBasicLeft() - zoomPivotOnImageX * (zoom * getBasicZoom());
-            panY = zoomPivotOnPageY - getBasicTop() - zoomPivotOnImageY * (zoom * getBasicZoom());
-            updateImagePlacement();
+            adjustZoom(ev.movementX * 0.005);
         }
+    };
+    document.onwheel = function (ev) {
+        ev.preventDefault();
+        zoomPivotOnPageX = ev.pageX;
+        zoomPivotOnPageY = ev.pageY;
+        zoomPivotOnImageX = (ev.pageX - (getBasicLeft() + panX)) / (zoom * getBasicZoom());
+        zoomPivotOnImageY = (ev.pageY - (getBasicTop() + panY)) / (zoom * getBasicZoom());
+        adjustZoom(ev.deltaY * -0.002);
     };
     window.onresize = function () {
         updateImagePlacement();
