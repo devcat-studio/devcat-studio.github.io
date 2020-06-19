@@ -143,4 +143,12 @@ img.onload = function () {
         updateImagePlacement();
     };
 };
+var helpButton = document.getElementById('HelpButton');
+var helpContent = document.getElementById('HelpContent');
+helpButton.onclick = function () {
+    helpContent.style.visibility = 'visible';
+};
+helpContent.onclick = function () {
+    helpContent.style.visibility = 'hidden';
+};
 //# sourceMappingURL=imageviewer.js.map
